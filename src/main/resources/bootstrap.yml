@@ -1,0 +1,17 @@
+# application name
+spring:
+  application:
+    name: cloud-productionTask
+  # nacos config
+  cloud:
+    nacos:
+      config:
+        server-addr: nacos.yunshicloud.com:80
+#        file-extension: yml
+        namespace: 64842816-8bde-42d4-a18f-32a3ffebe028
+        prefix: cloud-cdnTask
+        group: PLAN_A
+        encode: UTF-8
+
+
+
