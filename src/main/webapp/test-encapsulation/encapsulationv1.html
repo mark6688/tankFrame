@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v1.0计算器</title>
+</head>
+<body>
+    <div id="frmMain">
+        <div id="frmMainAddTemplate">
+
+        </div>
+        <div id="frmMainButten" style="margin-top:50px;">
+            <button onclick="showTemplate(this)" value="0">显示模板</button>
+            <button onclick="resultNum(this)" value="0">计算最终结果(递归+迭代)</button>
+            <button onclick="resultNum1(this)" value="0">计算最终结果(迭代)</button>
+            <button onclick="cleanFrmMain()" value="0">清除面板</button>
+            <button onclick="cleanFrmMainInputContent()" value="0">清除面板中内容</button>
+        </div>
+    </div>
+    <div style="display: none; margin-top:50px;" id="template">
+        <input onclick="inputAdd()" style='width: 35px;'><br>
+        <label onclick="lableAdd(this)">+</label><br>
+        <label onclick="lableAdd(this)">-</label><br>
+        <label onclick="lableAdd(this)">=</label>
+    </div>
+</body>
+<script src="./jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    //模板隐藏显示执行方法
+    function showTemplate(obj) {
+        if("0" == obj.value){
+            $("#template")[0].style.display = "block";
+            obj.value="1";
+            obj.textContent="隐藏模板";
+        }else{
+            $("#template")[0].style.display = "none";
+            obj.value="0";
+            obj.textContent="显示模板";
+        }
+    }
+    //模板中添加输入框方法
+    function inputAdd() {
+        var frmMainAll = $("#frmMainAddTemplate").children();
+        if(frmMainAll.length == 0){
+            $("#frmMainAddTemplate").append("<input name='inputName' style='margin-left: 10px; width: 35px;'>");
+            return;
+        }
+        var lastValue = frmMainAll[frmMainAll.length - 1].value;
+        if(lastValue == "="){
+            alert("最后一项已经为'='号，不可以再次添加输入框！");
+            return;
+        }else if(lastValue == "+" || lastValue == "-"){
+            $("#frmMainAddTemplate").append("<input name='inputName' style='margin-left: 10px; width: 35px;'>");
+        }else{
+            alert("请选择符号！");
+            return;
+        }
+    }
+    //模板中添加符号方法
+    function lableAdd(obj) {
+        var frmMainAll = $("#frmMainAddTemplate").children();
+        if(frmMainAll.length == 0){
+            alert("请添加输入框！");
+            return;
+        }
+        var lastValue = frmMainAll[frmMainAll.length - 1].value;
+        if(lastValue == "="){
+            alert("最后一项已经为'='号，不可以再次添加输入框！");
+            return;
+        }else if(lastValue == "+" || lastValue == "-"){
+            alert("请添加输入框！");
+            return;
+        }else{
+            $("#frmMainAddTemplate").append("<input readonly='readonly' style='margin-left: 10px; width: 10px;' value='"+obj.textContent+"'>");
+        }
+    }
+    //清除窗体中所有加载的内容
+    function cleanFrmMain() {
+        $("#frmMainAddTemplate").html("");
+    }
+    //清除窗体中控件的值
+    function cleanFrmMainInputContent() {
+        var inputAll = $("input[name='inputName']");
+        for(var i = 0;i<inputAll.length;i++){
+            inputAll[i].value = "";
+        }
+        $(".inputName").value ="";
+    }
+    //计算最终结果按钮执行方法
+    function resultNum() {
+        var frmMainAll = $("#frmMainAddTemplate").children();
+        if(frmMainAll.length == 0){
+            alert("请设置计算器！");
+            return;
+        }else{
+            if(frmMainAll[frmMainAll.length - 1].value != "="){
+                alert("最后一项必须为'='号，才可以计算结果");
+                return;
+            }
+        }
+        var array = [];
+        for (var i = 0;i<frmMainAll.length-1;i++){
+            array.push(frmMainAll[i].value);
+        }
+        if(array.length <= 2){
+            alert("计算结果为："+array[0]);
+            return;
+        }else{
+            var result = iteration(array)
+            alert("计算结果为："+result);
+        }
+    }
+
+    //迭代方法,递归+迭代实现
+    function iteration(array) {
+        //如果判断是最后一个则返回最后一个的值
+        if(array.length == 1){
+            return array[0];
+        }else if(array.length == 3){
+            var resultOne = calculation(array[0],array[2],array[1]);
+            return resultOne;
+        }else{
+            var newArray = [];
+            var resultOne = calculation(array[0],array[2],array[1]);
+            newArray.push(resultOne);
+            for (var i = 3;i<array.length;i++){
+                newArray.push(array[i]);
+            }
+            return  iteration(newArray);
+        }
+    }
+
+    //迭代方式实现
+    function resultNum1() {
+        var frmMainAll = $("#frmMainAddTemplate").children();
+        if(frmMainAll.length == 0){
+            alert("请设置计算器！");
+            return;
+        }else{
+            if(frmMainAll[frmMainAll.length - 1].value != "="){
+                alert("最后一项必须为'='号，才可以计算结果");
+                return;
+            }
+        }
+        var array = [];
+        for (var i = 0;i<frmMainAll.length-1;i++){
+            array.push(frmMainAll[i].value);
+        }
+        if(array.length <= 2){
+            alert("计算结果为："+array[0]);
+            return;
+        }else{
+            var result = iteration1(array)
+            alert("计算结果为："+result);
+        }
+    }
+
+    //迭代方法实现
+    var thirdParty  = 0;
+    function iteration1(array) {
+        for (var i = 1;i<array.length;i=i+2){
+            if(i == 1){
+                thirdParty = array[0];
+            }
+            thirdParty = calculation(thirdParty,array[i+1],array[i]);
+        }
+        return thirdParty;
+    }
+
+    //计算方法
+    function calculation(value1,value2,operator) {
+        var v1 = Number(value1);
+        var v2 = Number(value2);
+
+        if('+' == operator){
+            return v1+v2;
+        }else if('-' == operator){
+            return v1-v2;
+        }else {
+            return 0;
+        }
+    }
+
+</script>
+</html>
