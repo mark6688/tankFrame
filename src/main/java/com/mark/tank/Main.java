@@ -5,7 +5,7 @@ package com.mark.tank;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)throws Exception {
 //        Frame f = new Frame();
 //        f.setSize(800,600);
 //        f.setResizable(false);
@@ -21,5 +21,9 @@ public class Main {
 //        });
 
         TankFrame tankFrame = new TankFrame();
+        while (true){
+            Thread.sleep(50);
+            tankFrame.repaint();
+        }
     }
 }

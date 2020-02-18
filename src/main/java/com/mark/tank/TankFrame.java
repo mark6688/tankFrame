@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-    int x =200, y = 200;
+    int x =20, y = 20;
 
    public TankFrame(){
        setSize(800,600);
@@ -31,7 +31,7 @@ public class TankFrame extends Frame {
    }
 
     @Override
-    public void print(Graphics g) {
+    public void paint(Graphics g) {
         g.fillRect(x,y,60,60);
         x += 10;
         y += 10;
@@ -40,10 +40,12 @@ public class TankFrame extends Frame {
     class MyKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
+            System.out.println("key pressed");
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
+            System.out.println("key Released");
         }
     }
 }
