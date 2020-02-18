@@ -9,11 +9,10 @@
         <version>2.1.7.RELEASE</version>
     </parent>
     <properties>
-        <version>2.0.4</version>
-        <skipTests>true</skipTests>
+
     </properties>
-    <groupId>com.yunshi.mediacloud</groupId>
-    <artifactId>cloud-cdntask</artifactId>
+    <groupId>com.mark.tank</groupId>
+    <artifactId>tank</artifactId>
     <version>v1.0.0</version>
     <dependencyManagement>
         <dependencies>
@@ -46,23 +45,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-          <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpmime</artifactId>
-            </dependency>
-             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-            </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
         </dependency>
         <!-- nacos cloud -->
         <dependency>
