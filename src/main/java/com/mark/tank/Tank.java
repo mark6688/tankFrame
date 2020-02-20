@@ -12,6 +12,8 @@ public class Tank {
 
     private boolean moving = false;
 
+    private TankFrame tankFrame = null;
+
     public boolean isMoving() {
         return moving;
     }
@@ -20,11 +22,12 @@ public class Tank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir) {
+    public Tank(int x, int y, Dir dir,TankFrame tankFrame) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tankFrame = tankFrame;
     }
 
     public int getX() {
@@ -81,4 +84,7 @@ public class Tank {
         }
     }
 
+    public void fire() {
+        tankFrame.b = new Bullet(this.x,this.y,this.dir);
+    }
 }
