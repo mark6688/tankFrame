@@ -7,13 +7,15 @@ import java.awt.*;
  */
 public class Bullet {
     private static final int SPEED = 10;
-    private static final int WIDTH = 30,HEIGHT = 30;
 
     private int x,y;
     private Dir dir;
 
     public boolean live = true;
     private TankFrame tankFrame = null;
+
+    public static int WIDTH = ResourceMgr.bulletD.getWidth();
+    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
 
 
     public Bullet(int x, int y, Dir dir,TankFrame tankFrame) {
@@ -27,10 +29,20 @@ public class Bullet {
         if(!live){
             tankFrame.bulletList.remove(this);
         }
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x,y,WIDTH,HEIGHT);
-        g.setColor(c);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceMgr.bulletL,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.bulletU,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.bulletR,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.bulletD,x,y,null);
+                break;
+        }
         move();
     }
 
