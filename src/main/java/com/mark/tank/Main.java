@@ -1,5 +1,9 @@
 package com.mark.tank;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 /**
  * Created by makang on 2019/11/19.
  */

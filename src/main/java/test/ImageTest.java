@@ -2,22 +2,24 @@ package test;
 
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Created by makang on 2020/2/20.
  */
-class ImageTest {
-
-    public void test1(){
-
-    }
+public class ImageTest {
 
     @Test
-    void test(){
+    void test()throws Exception{
 
-//        fail("");
-        assertNotNull(new Object());
+        BufferedImage image = ImageIO.read(new File("C:/idea/1.jpg"));
+        assertNotNull(image);
+//        BufferedImage images = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("1.gif"));
+//        assertNotNull(images);
 
     }
 }
