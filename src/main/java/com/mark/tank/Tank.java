@@ -1,6 +1,9 @@
 package com.mark.tank;
 
+import org.springframework.beans.factory.groovy.GroovyBeanDefinitionReader;
+
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by makang on 2020/2/20.
@@ -8,15 +11,19 @@ import java.awt.*;
 public class Tank {
     private int x,y;
     private Dir dir = Dir.DOWN;
-    private static final int SPEED = 5;
+    private static final int SPEED = 1;
 
-    private boolean moving = false;
+    private boolean moving = true;
 
     private TankFrame tankFrame = null;
 
     public static int WIDTH = ResourceMgr.tankD.getWidth();
     public static int HEIGHT = ResourceMgr.tankD.getHeight();
     private boolean liveing = true;
+
+    private Random random = new Random();
+
+    private Group group = Group.BAD;
 
     public boolean isMoving() {
         return moving;
@@ -26,11 +33,12 @@ public class Tank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir,Group group,TankFrame tankFrame) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
@@ -100,12 +108,23 @@ public class Tank {
                 y+=SPEED;
                 break;
         }
+        if(random.nextInt(10) > 8){
+            this.fire();
+        }
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void fire() {
         int dX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int dY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankFrame.bulletList.add(new Bullet(dX,dY,this.dir,tankFrame));
+        tankFrame.bulletList.add(new Bullet(dX,dY,this.dir,this.group,tankFrame));
     }
 
     public void dis() {
