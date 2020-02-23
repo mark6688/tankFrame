@@ -86,6 +86,7 @@ public class Bullet {
         rectangle.y = this.y;
     }
 
+    //碰撞检测方法Rectangle，矩形重叠运用
     public void collideWith(Tank tank) {
         if(this.group == tank.getGroup()){return;}
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Created by makang on 2019/11/19.
+ * 继承Frame类，来实现创建一个客户端窗体
  */
 public class TankFrame extends Frame {
 
@@ -38,6 +39,8 @@ public class TankFrame extends Frame {
 
    Image offScreenImage = null;
 
+   //双向缓冲问题：当内存向显存进行绘画的时候，先进行拦截将要呈现的内容一起放到内存
+    //然后一起吐给显存从而解决重画闪动的问题
     @Override
     public void update(Graphics g) {
         if(offScreenImage == null){
@@ -61,6 +64,7 @@ public class TankFrame extends Frame {
         g.drawString("爆炸的数量："+explodeList.size(),10,100);
         g.setColor(c);
         myTank.paint(g);
+        //通过普通循环放置对象，解决放置过程中移除集合中内容导致数组长度改变报错问题
         for (int i = 0;i<bulletList.size();i++){
             bulletList.get(i).paint(g);
         }
@@ -78,6 +82,7 @@ public class TankFrame extends Frame {
             }
         }
 
+//也可以通过如下迭代器解决
 //        for(Iterator<Bullet> it = bulletList.iterator();it.hasNext();){
 //            Bullet b = it.next();
 //            if(!b.live){
