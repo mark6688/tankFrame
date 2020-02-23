@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
+    Explode explode = new Explode(100,200,this);
     java.util.List<Bullet> bulletList = new ArrayList<>();
     java.util.List<Tank> tanks = new ArrayList<>();
     static final int GAME_WIGTH = 800,GAME_HEIGHT =600;
@@ -71,6 +72,7 @@ public class TankFrame extends Frame {
                 bulletList.get(i).collideWith(tanks.get(j));
             }
         }
+        explode.paint(g);
 
 //        for(Iterator<Bullet> it = bulletList.iterator();it.hasNext();){
 //            Bullet b = it.next();

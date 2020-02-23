@@ -16,10 +16,10 @@ public class ImageTest {
     @Test
     void test()throws Exception{
 
-        BufferedImage image = ImageIO.read(new File("C:/idea/1.jpg"));
-        assertNotNull(image);
-//        BufferedImage images = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("1.gif"));
-//        assertNotNull(images);
+//        BufferedImage image = ImageIO.read(new File("C:/idea/1.jpg"));
+//        assertNotNull(image);
+        BufferedImage images = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/1.gif"));
+        assertNotNull(images);
 
     }
 }
