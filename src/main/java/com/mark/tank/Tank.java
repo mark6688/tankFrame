@@ -112,7 +112,14 @@ public class Tank {
         if(this.group == Group.BAD && random.nextInt(100)>95){
             randomDir();
         }
+        boundCheck();
+    }
 
+    private void boundCheck() {
+        if(this.x <2) x=2;
+        if(this.y < 32) y = 32;
+        if(this.x > TankFrame.GAME_WIGTH - Tank.WIDTH) x = TankFrame.GAME_WIGTH - Tank.WIDTH -2;
+        if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT -2;
     }
 
     private void randomDir() {
