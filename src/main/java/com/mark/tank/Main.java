@@ -10,22 +10,10 @@ import java.io.File;
 public class Main {
 
     public static void main(String[] args)throws Exception {
-//        Frame f = new Frame();
-//        f.setSize(800,600);
-//        f.setResizable(false);
-//        f.setTitle("tank war");
-//        f.setVisible(true);
-//
-//        f.addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                System.exit(0);
-////                super.windowClosing(e);
-//            }
-//        });
 
+        int initTankCount = Integer.valueOf(String.valueOf(PropertyMgr.get("initTankCount")));
         TankFrame tankFrame = new TankFrame();
-        for(int i =0;i<5;i++){
+        for(int i =0;i<initTankCount;i++){
             tankFrame.tanks.add(new Tank(50+i*80,200,Dir.DOWN,Group.BAD,tankFrame));
         }
         while (true){
