@@ -26,7 +26,7 @@ public class Explode {
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[stop++],x,y,null);
         if(stop >= ResourceMgr.explodes.length){
-            stop=0;
+            tankFrame.explodeList.remove(this);
         }
 
     }

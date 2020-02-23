@@ -1,7 +1,5 @@
 package com.mark.tank;
 
-import org.springframework.beans.factory.groovy.GroovyBeanDefinitionReader;
-
 import java.awt.*;
 import java.util.Random;
 

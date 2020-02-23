@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
-    Explode explode = new Explode(100,200,this);
-    java.util.List<Bullet> bulletList = new ArrayList<>();
-    java.util.List<Tank> tanks = new ArrayList<>();
+    java.util.List<Bullet> bulletList = new ArrayList<Bullet>();
+    java.util.List<Tank> tanks = new ArrayList<Tank>();
+    java.util.List<Explode> explodeList = new ArrayList<Explode>();
     static final int GAME_WIGTH = 800,GAME_HEIGHT =600;
 
 
@@ -58,6 +58,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量："+bulletList.size(),10,60);
         g.drawString("敌人的数量："+tanks.size(),10,80);
+        g.drawString("爆炸的数量："+explodeList.size(),10,100);
         g.setColor(c);
         myTank.paint(g);
         for (int i = 0;i<bulletList.size();i++){
@@ -67,12 +68,15 @@ public class TankFrame extends Frame {
             tanks.get(i).paint(g);
         }
 
+        for(int i =0;i<explodeList.size();i++){
+            explodeList.get(i).paint(g);
+        }
+
         for(int i =0;i<bulletList.size();i++){
             for(int j=0;j<tanks.size();j++){
                 bulletList.get(i).collideWith(tanks.get(j));
             }
         }
-        explode.paint(g);
 
 //        for(Iterator<Bullet> it = bulletList.iterator();it.hasNext();){
 //            Bullet b = it.next();
