@@ -7,6 +7,7 @@ import java.util.Random;
  * Created by makang on 2020/2/20.
  */
 public class Tank {
+    public Rectangle rectangle = new Rectangle();
     private int x,y;
     private Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
@@ -38,6 +39,10 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+        rectangle.width = WIDTH;
+        rectangle.height = HEIGHT;
     }
 
     public int getX() {
@@ -113,6 +118,8 @@ public class Tank {
             randomDir();
         }
         boundCheck();
+        rectangle.x = this.x;
+        rectangle.y = this.y;
     }
 
     private void boundCheck() {
