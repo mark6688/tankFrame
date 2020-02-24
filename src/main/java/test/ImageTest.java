@@ -14,13 +14,28 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class ImageTest {
 
-    @Test
+//    @Test
     void test()throws Exception{
 
 //        BufferedImage image = ImageIO.read(new File("C:/idea/1.jpg"));
 //        assertNotNull(image);
         BufferedImage images = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/1.gif"));
         assertNotNull(images);
+
+    }
+
+    public static void main(String[] args) {
+        //lamada表达式，将类的实例化省略，类中只有一个方法的话，也将方法省略而用->代替的作用
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("线程创建");
+            }
+        }).start();
+
+        new Thread(()->{
+            System.out.println("lamada表达式创建");
+        }).start();
 
     }
 }
