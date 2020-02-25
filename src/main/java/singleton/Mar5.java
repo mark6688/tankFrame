@@ -5,7 +5,8 @@ package singleton;
  * 也称懒汉式
  * 虽然达到了需要的时候加载，但是带来了线程不安全的问题
  * 可以通过synchronized来解决，但是也带来了效率低下的问题
- */
+ * 没有解决线程问题
+ * */
 public class Mar5 {
     private static Mar5 INSTANCE;
     private Mar5(){}
