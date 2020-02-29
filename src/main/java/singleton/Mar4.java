@@ -7,11 +7,12 @@ package singleton;
  * 可以通过synchronized来解决，但是也带来了效率低下的问题
  */
 public class Mar4 {
-    private static Mar4 INSTANCE;
+    private static volatile Mar4 INSTANCE;
     private Mar4(){}
 
     public static synchronized Mar4 getInstance(){
         if(INSTANCE == null){
+            //测试并发加入的睡眠
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

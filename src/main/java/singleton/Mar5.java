@@ -14,6 +14,7 @@ public class Mar5 {
     public static  Mar5 getInstance(){
         if(INSTANCE == null){
             synchronized(Mar5.class){
+                //测试并发加入的睡眠
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {

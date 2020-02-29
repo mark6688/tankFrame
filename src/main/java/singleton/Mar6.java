@@ -15,6 +15,7 @@ public class Mar6 {
         if(INSTANCE == null){
             synchronized(Mar6.class){
                 if(INSTANCE == null) {
+                    //测试并发加入的睡眠
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException e) {
