@@ -23,7 +23,7 @@ public class TankFrame extends Frame {
    public TankFrame(){
        setSize(GAME_WIGTH,GAME_HEIGHT);
        setResizable(false);
-       setTitle("Mark Game");
+       setTitle("Mark Gamev1.0.4");
        setVisible(true);
 
        this.addKeyListener(new MyKeyListener());
@@ -59,6 +59,7 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
+        g.drawString("说明：发子弹(ctrl)、控制方向(键盘的上下左右)",10,40);
         g.drawString("子弹的数量："+bulletList.size(),10,60);
         g.drawString("敌人的数量："+tanks.size(),10,80);
         g.drawString("爆炸的数量："+explodeList.size(),10,100);
