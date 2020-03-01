@@ -8,13 +8,13 @@ import java.util.Random;
  */
 public class Tank {
     public Rectangle rectangle = new Rectangle();
-    private int x,y;
-    private Dir dir = Dir.DOWN;
+    int x,y;
+    Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
 
     private boolean moving = true;
 
-    private TankFrame tankFrame = null;
+    TankFrame tankFrame = null;
 
     public static int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankD.getHeight();
@@ -22,7 +22,9 @@ public class Tank {
 
     private Random random = new Random();
 
-    private Group group = Group.BAD;
+    Group group = Group.BAD;
+
+    FireComparable<Tank> firComparable = new DefaultFireStrategy();
 
     public boolean isMoving() {
         return moving;
@@ -43,6 +45,22 @@ public class Tank {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
+        if(this.group == Group.GOOD){
+            String goodFS = String.valueOf(PropertyMgr.get("goodFS"));
+            try {
+                //这里jdk1.8之后Class.forName(goodFS).newInstance()这种方式被废弃了，用了以下方式来进行反射如果存在有参构造的话就不会有问题了
+                firComparable = (FireComparable<Tank>) Class.forName(goodFS).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            String badFS = String.valueOf(PropertyMgr.get("badFS"));
+            try {
+                firComparable = (FireComparable<Tank>) Class.forName(badFS).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public int getX() {
@@ -142,9 +160,7 @@ public class Tank {
     }
 
     public void fire() {
-        int dX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int dY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankFrame.bulletList.add(new Bullet(dX,dY,this.dir,this.group,tankFrame));
+        firComparable.fir(this);
     }
 
     public void dis() {
